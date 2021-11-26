@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/**"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "D:\\Program Files (x86)\\VC\\Tools\\MSVC\\14.29.30133\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64",
+            "configurationProvider": "go2sh.cmake-integration"
+        },
+        {
+            "name": "posix",
+            "includePath": [
+                "${default}",
+                "${workspaceFolder}/**"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "K:/X64/Gcc and G++/MinGW-w64/x86_x64/posix/mingw64/bin/gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64",
+            "mergeConfigurations": false,
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false
+            }
+        }
+    ],
+    "version": 4
+}

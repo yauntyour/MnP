@@ -1,0 +1,10 @@
+{
+    "C_Cpp.default.configurationProvider": "go2sh.cmake-integration",
+    "files.associations": {
+        "*.html": "html",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "cstdio": "cpp",
+        "fstream": "cpp"
+    }
+}
