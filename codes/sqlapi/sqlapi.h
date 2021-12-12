@@ -57,11 +57,11 @@ std::vector<std::string> MySQL_select(MYSQL mysql_db,const char *SELECT)
 //表名 table //指定列(column1,column2,column3,...) // data list (value1,value2,value3,...)
 int MySQL_insert(MYSQL mysql_db,
                  //表名 table
-                 char *table,
+                 const char *table,
                  //指定列(column1,column2,column3,...)
-                 char *column,
+                 const char *column,
                  // data list (value1,value2,value3,...)
-                 char *ver)
+                 const char *ver)
 {
     std::string str = "insert into ";
     str = str + table + column + "VALUES" + ver;

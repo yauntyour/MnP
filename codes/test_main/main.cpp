@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
     Asfio as = Asfio_create("K:\\Dome\\MnP\\bin\\000.txt","rb+");
 
     s = clock();
-    Asfio_write(&as,"HelloWorld");
+    Asfio_write(&as,"HelloWorld-------");
     e = clock();
     Total_time = (double)(e - s) / CLOCKS_PER_SEC;
     printf("\n函数运行时间:%0.3fms \n", Total_time);
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     printf("\n函数运行时间:%0.3fms \n", Total_time);
     Asfio_close(&as,0);
 
-    /*
+    
     MYSQL db = MySQL_create("127.0.0.1", "root", "", "tsdb", 3306, NULL, 0);
     MySQL_insert(db,"test","(name,age)","('SB',12)");
 
@@ -43,6 +43,6 @@ int main(int argc, char const *argv[])
 		std::cout << *it << std::endl;
 	}
     mysql_close(&db);
-    */
+    
     return 0;
 }

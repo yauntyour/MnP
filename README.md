@@ -6,4 +6,4 @@ In this time,this project didn't done. But my idea is this project has a industr
 
 Above it's my project's summary in initial stage.
 
-![a mind about MnP](https://github.com/yauntyour/MnP/blob/master/doc/MnP.png)
+![a mind about MnP](./doc/MnP.png)

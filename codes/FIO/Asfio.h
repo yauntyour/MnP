@@ -17,7 +17,7 @@ typedef struct Asfio // asynchronous I/O
 // pthread_t redefine
 typedef unsigned long long CALLBLACK_TH;
 
-extern Asfio Asfio_create(const char *filepath, char *mode)
+extern Asfio Asfio_create(const char *filepath,const char *mode)
 {
     Asfio asfio;
     // create a luck
