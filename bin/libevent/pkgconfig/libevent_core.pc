@@ -1,0 +1,16 @@
+#libevent pkg-config source file
+
+prefix=K:/APPLibrary/libevent-2.1.12-stable/out/install/x64-Debug
+exec_prefix=K:/APPLibrary/libevent-2.1.12-stable/out/install/x64-Debug
+libdir=K:/APPLibrary/libevent-2.1.12-stable/out/install/x64-Debug/lib
+includedir=K:/APPLibrary/libevent-2.1.12-stable/out/install/x64-Debug/include
+
+Name: libevent_core
+Description: libevent_core
+Version: 2.1.12
+Requires:
+Conflicts:
+Libs: -L${libdir} -levent_core
+Libs.private:  -Lws2_32 -Lshell32 -Ladvapi32
+Cflags: -I${includedir}
+
