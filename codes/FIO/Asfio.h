@@ -6,22 +6,23 @@
 #include <string.h>
 #include <assert.h>
 #include "fiotypes.h"
+#include "../unit/unitools.h"
 
-typedef struct Asfio //asynchronous I/O
+typedef struct Asfio // asynchronous I/O
 {
     FILE *Stream;
-    //luck with asyio
+    // luck with asyio
     pthread_rwlock_t AsfioLuck;
 } Asfio;
-//pthread_t redefine
+// pthread_t redefine
 typedef unsigned long long CALLBLACK_TH;
 
 extern Asfio Asfio_create(const char *filepath, char *mode)
 {
     Asfio asfio;
-    //create a luck
+    // create a luck
     pthread_rwlock_init(&asfio.AsfioLuck, NULL);
-    //get file port.
+    // get file port.
     FILE *p = fopen(filepath, mode);
     if (p == NULL)
     {
@@ -29,20 +30,20 @@ extern Asfio Asfio_create(const char *filepath, char *mode)
         asfio.Stream = NULL;
         return asfio;
     }
-    //get file stream
+    // get file stream
     asfio.Stream = p;
     return asfio;
 }
 
-//read function
+// read function
 void *__read__(void *args)
 {
     Asfio *asp = (Asfio *)args;
     pthread_rwlock_rdlock(&asp->AsfioLuck);
-    void *filedata = malloc(FIO_TELL(asp->Stream));
+    size_t i = FIO_TELL(asp->Stream);
+    void *filedata = malloc(i);
     fseek(asp->Stream, 0L, SEEK_SET);
-    
-    if (fread(filedata,1ULL, sizeof(filedata), asp->Stream) == sizeof(filedata))
+    if (fread(filedata, 1ULL, i, asp->Stream) == i)
     {
         rewind(asp->Stream);
         pthread_rwlock_unlock(&asp->AsfioLuck);
@@ -56,7 +57,7 @@ void *__read__(void *args)
         return (void *)NULL;
     }
 }
-extern CALLBLACK_TH Asfio_read(Asfio *asp)
+extern CALLBLACK_TH Asfio_readall(Asfio *asp)
 {
     if (asp != NULL)
     {
@@ -77,7 +78,7 @@ extern CALLBLACK_TH Asfio_read(Asfio *asp)
         return 0;
     }
 }
-//callblack function
+// callblack function
 extern void *Asfio_callblack(CALLBLACK_TH th)
 {
     if (th != -1 & th != 0)
@@ -108,19 +109,19 @@ extern void *Asfio_callblack(CALLBLACK_TH th)
     }
 }
 
-//define a args struct
+// define a args struct
 typedef struct
 {
     Asfio *asp;
     const void *Element;
 } W_args;
-//write function
+// write function
 void *__write__(void *args)
 {
-    W_args* wargs = (W_args*)args;
+    W_args *wargs = (W_args *)args;
     pthread_rwlock_wrlock(&wargs->asp->AsfioLuck);
-    size_t i = sizeof(wargs->Element)/1ULL;
-    if (fwrite(wargs->Element,1ULL,i,wargs->asp->Stream) == sizeof(wargs->Element))
+    size_t i = bufflen(wargs->Element);
+    if (fwrite(wargs->Element, 1ULL, i, wargs->asp->Stream) ==i)
     {
         pthread_rwlock_unlock(&wargs->asp->AsfioLuck);
         return (void *)0;
@@ -143,7 +144,7 @@ extern int Asfio_write(Asfio *asp, const void *Element)
         pthread_t th;
         if (pthread_create(&th, NULL, __write__, (void *)&wargs) == 0)
         {
-            pthread_join(th,NULL);
+            pthread_join(th, NULL);
             return 1;
         }
         else
@@ -158,7 +159,7 @@ extern int Asfio_write(Asfio *asp, const void *Element)
         return 0;
     }
 }
-//Asfio close function
+// Asfio close function
 extern int Asfio_close(Asfio *asp, int mode)
 {
     pthread_rwlock_wrlock(&asp->AsfioLuck);

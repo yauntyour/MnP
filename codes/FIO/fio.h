@@ -10,6 +10,5 @@ extern size_t FIO_TELL(FILE*p){
 }
 #include "fiotypes.h"
 #include "Asfio.h"
-#include "Syfio.h"
 
 #endif  //!__FIO__H__
