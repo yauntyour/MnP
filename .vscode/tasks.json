@@ -11,10 +11,13 @@
                 "-o",
                 "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
                 "-fexec-charset=UTF-8",
-                //"-lwsock32",
+                "-lwsock32",
                 "-lpthread",
                 "-L${workspaceFolder}\\bin\\",
                 "-lmysql",
+                //libevent lib import
+                "-L${workspaceFolder}\\bin\\libevent\\",
+                "-levent",
             ],
             "options": {
                 "cwd": "${workspaceFolder}\\bin\\"
